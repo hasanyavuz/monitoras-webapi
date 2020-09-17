@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoras-webapi-deployment
+spec:
+  selector:
+    matchLabels:
+      app: monitoras-webapi-pod
+  template:
+    metadata:
+      labels:
+        app: monitoras-webapi-pod
+    spec:
+      imagePullSecrets:
+      - name: hyavuz01
+      containers:
+      - name: monitoras-webapi-container
+        image: hyavuz01.azurecr.io/monitoras-webapi:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
